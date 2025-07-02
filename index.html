@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIプログラミング学習コミュニティ</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #50e3c2;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --white: #fff;
+            --header-height: 70px;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav li {
+            margin-left: 30px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        .main-content {
+            padding-top: var(--header-height);
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            text-align: center;
+            padding: 120px 20px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .btn {
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            margin-left: 15px;
+        }
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .feature-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+        }
+        #about {
+            background-color: var(--white);
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-image {
+            flex: 1;
+            max-width: 500px;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .testimonial-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--secondary-color);
+        }
+        .testimonial-card p {
+            font-style: italic;
+        }
+        .testimonial-author {
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: right;
+        }
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .pricing-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            width: 320px;
+            border-top: 5px solid var(--primary-color);
+        }
+        .pricing-card.recommended {
+            border-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .pricing-card li {
+            margin-bottom: 15px;
+        }
+        .pricing-card .btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        .pricing-card.recommended .btn {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .faq-question {
+            padding: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+        }
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-top: 10px;
+        }
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        .cta-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        footer {
+            background-color: #333;
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            nav ul {
+                display: none; /* Simple responsive for now */
+            }
+            .about-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">AI.Dev</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">コミュニティについて</a></li>
+                    <li><a href="#features">特徴</a></li>
+                    <li><a href="#pricing">料金プラン</a></li>
+                    <li><a href="#faq">よくある質問</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="hero" class="hero">
+            <h1>AIと共に未来を創る、<br>実践型プログラミングコミュニティ</h1>
+            <p>初心者から経験者まで。AI開発のスキルを実践的に学び、仲間と共に成長できる場所です。</p>
+            <a href="#cta" class="btn">今すぐ参加する</a>
+            <a href="#" class="btn btn-secondary">無料で資料請求</a>
+        </section>
+
+        <section id="about">
+            <div class="container about-content">
+                <div class="about-text">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">AI.Devコミュニティとは？</h2>
+                    <p>AI.Devは、単なるプログラミングスクールではありません。AI技術を軸に、参加者同士が学び合い、刺激し合いながら、実社会で通用するスキルを身につけるための実践的なコミュニティです。</p>
+                    <p>最新のAIトレンドの共有、チームでのプロダクト開発、現役エンジニアによるコードレビューなど、あなたの「作りたい」を形にするための環境がここにあります。</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=2070&auto=format&fit=crop" alt="プログラミング風景">
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title">コミュニティの3つの特徴</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>現役エンジニアによるメンタリング</h3>
+                        <p>業界の第一線で活躍するエンジニアが、あなたの学習を徹底サポート。技術的な疑問からキャリアの相談まで、気軽に質問できます。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>プロジェクトベース学習</h3>
+                        <p>実在する課題をテーマに、チームでプロダクトを開発。企画からリリースまで、実務に近い経験を積むことができます。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3>活発なコミュニティイベント</h3>
+                        <p>毎週の勉強会やLT大会、数ヶ月に一度のハッカソンなど、仲間と交流し、モチベーションを高めるイベントが満載です。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" style="background-color: var(--white);">
+            <div class="container">
+                <h2 class="section-title">参加者の声</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p>"独学では挫折しがちでしたが、ここにはいつでも相談できる仲間とメンターがいます。おかげで機械学習モデルを自力で実装できました！"</p>
+                        <div class="testimonial-author">- T. Yamada (20代・Webデザイナー)</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"プロジェクト開発が最高の経験でした。チームメンバーと議論を重ねて一つのものを作り上げる過程で、技術力だけでなく、コミュニケーション能力も向上しました。"</p>
+                        <div class="testimonial-author">- S. Tanaka (30代・SIerエンジニア)</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"最新の論文を読む会や、外部の専門家を招いたセミナーなど、常に新しい知識に触れられるのが魅力的です。AIの世界の広さと深さを実感しています。"</p>
+                        <div class="testimonial-author">- K. Suzuki (20代・学生)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing">
+            <div class="container">
+                <h2 class="section-title">料金プラン</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>月額プラン</h3>
+                        <div class="price">¥3,800<span>/月</span></div>
+                        <ul>
+                            <li>✔ 全てのオンラインコンテンツへのアクセス</li>
+                            <li>✔ Slackコミュニティへの参加</li>
+                            <li>✔ 週1回のオンライン勉強会</li>
+                            <li>✔ メンターへの質問（月5回まで）</li>
+                        </ul>
+                        <a href="#" class="btn">このプランで始める</a>
+                    </div>
+                    <div class="pricing-card recommended">
+                        <h3>年額プラン</h3>
+                        <div class="price">¥38,000<span>/年</span></div>
+                        <p style="color: var(--secondary-color); font-weight: bold;">2ヶ月分お得！</p>
+                        <ul>
+                            <li>✔ 全てのオンラインコンテンツへのアクセス</li>
+                            <li>✔ Slackコミュニティへの参加</li>
+                            <li>✔ 週1回のオンライン勉強会</li>
+                            <li>✔ メンターへの質問（無制限）</li>
+                            <li>✔ プロジェクト開発への優先参加権</li>
+                        </ul>
+                        <a href="#" class="btn">このプランで始める</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" style="background-color: var(--white);">
+            <div class="container" style="max-width: 800px;">
+                <h2 class="section-title">よくある質問</h2>
+                <div class="faq-item">
+                    <div class="faq-question">プログラミング初心者でも参加できますか？</div>
+                    <div class="faq-answer">
+                        <p>はい、もちろんです。本コミュニティには、Pythonの基礎から学べる初心者向けコースや、学習初期段階でのつまずきを解消するための手厚いメンターサポートがありますので、ご安心ください。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">どのようなスキルが身につきますか？</div>
+                    <div class="faq-answer">
+                        <p>Pythonの基礎文法から、NumPyやPandasといったデータ分析ライブラリ、Scikit-learnを使った機械学習モデルの実装、TensorFlow/PyTorchによるディープラーニング、そしてチームでの開発を進めるためのGit/GitHubのスキルまで、幅広く習得できます。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">他のプログラミングスクールとの違いは何ですか？</div>
+                    <div class="faq-answer">
+                        <p>一番の違いは「コミュニティ」である点です。一方的に教わるだけでなく、参加者同士が主体的に学び、プロジェクトを立ち上げ、共に成長していくことを重視しています。インプットだけでなく、アウトプットの機会が豊富に用意されています。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section">
+            <div class="container">
+                <h2>さあ、あなたもAI開発の世界へ。</h2>
+                <p style="margin-bottom: 30px;">未来を創る仲間たちが、あなたを待っています。</p>
+                <a href="#" class="btn">コミュニティに参加する</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">運営会社</a>
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">お問い合わせ</a>
+            </div>
+            <p>&copy; 2025 AI.Dev Community. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const faqItem = item.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
